@@ -90,7 +90,7 @@ prompt_end() {
 # prompt_segment black default "%(!.%{%F{yellow}%}.)%n@%m"
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment black default "%(!.%{%F{yellow}%}.)%n@nexeranet"
+    prompt_segment black default "%(!.%{%F{yellow}%}.)nexeranet"
   fi
 }
 
@@ -241,4 +241,3 @@ build_prompt() {
 }
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
-
