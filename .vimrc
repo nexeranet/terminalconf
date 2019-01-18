@@ -12,9 +12,12 @@ Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
 Plug 'kien/ctrlp.vim'
+Plug 'rking/ag.vim'
+Plug 'dracula/vim'
 call plug#end()
 
 set background=dark
+let g:airline_theme='luna'
 set t_Co=256
 colorscheme gruvbox
 " yank to clipboad
@@ -38,18 +41,19 @@ set hlsearch
 set incsearch
 set splitbelow
 set splitright
+set ma
 "mapping keys
 let g:NERDTreeDirArrows=0
 let NERDTreeDirArrows=0
 let g:NERDTreeDirArrowExpandable = '>'
 let g:NERDTreeDirArrowCollapsible = 'v'
 " Cmd + c, Cmd + v
-vnoremap <C-c> "+y
-map <C-v> "+p
+"vnoremap <C-c> "+y
+"map <C-v> "+p
 map <C-n> : NERDTreeToggle<CR>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
+noremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 "lets 
 let g:user_emmet_expandabbr_key='<Tab>'
@@ -57,11 +61,12 @@ let mapleader = ','
 "Imapping
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 "Ctrlp settings
+
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-
+let g:NERDTreeDirArrowExpandable = '>'
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
@@ -70,6 +75,7 @@ let g:ctrlp_custom_ignore = {
   \ }
 let g:ctrlp_user_command = 'find %s -type f'
 "syntastic settings
+
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
