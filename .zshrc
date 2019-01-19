@@ -63,8 +63,14 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
-  osx
+  git,
+  osx,
+  docker,
+  github,
+  zsh-syntax-highlighting,
+  brew,
+  autojump,
+  npm,
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -98,3 +104,4 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias dc="docker-compose"
+export LC_ALL=ru_RU.UTF-8
