@@ -35,12 +35,18 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 "code snippets
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
+"Plug 'Shougo/neosnippet'
+"Plug 'Shougo/neosnippet-snippets'
+" Track the engine.
+Plug 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
 
 " ==== FILES AND SEARCH PLUGINS ====== "
 
-Plug 'kien/ctrlp.vim'
+"Plug 'kien/ctrlp.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'rking/ag.vim'
 
 " ======== LANGUAGE SUPPORTS ========= "
