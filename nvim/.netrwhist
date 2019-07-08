@@ -1,7 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/Users/macbook/.config/nvim/snippets'
 let g:netrw_dirhist_2='/Users/macbook/.config/nvim'
 let g:netrw_dirhist_3='/Users/macbook/.config/nvim/snippets'
 let g:netrw_dirhist_4='/Users/macbook/.config/nvim'
 let g:netrw_dirhist_5='/Users/macbook/Documents/confgit'
+let g:netrw_dirhist_6='/Users/macbook/.config/nvim'
+let g:netrw_dirhist_7='/Users/macbook/.config/nvim/snippets'
+let g:netrw_dirhist_8='/Users/macbook/Documents/vim'
+let g:netrw_dirhist_9='/Users/macbook/.config/nvim'

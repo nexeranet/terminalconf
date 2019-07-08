@@ -27,6 +27,7 @@ set splitbelow
 set splitright
 set ma
 set cursorline
+set nocompatible
 "new rules for python
 set ruler
 set ignorecase
@@ -92,6 +93,11 @@ set nrformats= "Only decimal with counter
 " ============================================================================ "
 " ===                           PLUGIN SETUP                               === "
 " ============================================================================ "
+
+" ====== VIMWIKI ====== "
+
+let g:vimwiki_list = [{'path': '~/.config/nvim/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}] 
 
 " ====== DEOPLETE ====== "
 call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
@@ -271,7 +277,7 @@ set noshowcmd
 set laststatus=2
 
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 " === Vim airline ==== "
 " theme - murmur, luna, violet  
@@ -293,6 +299,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 "let g:airline_section_z=''
 " remove separators for empty sections
 let g:airline_skip_empty_sections = 1
+let g:airline#extensions#whitespace#enabled = 0
 
 function! NumberToggle()
   if(&relativenumber == 1)

@@ -2,6 +2,12 @@
 " ===                               PLUGINS                                === "
 " ============================================================================ "
 call plug#begin('~/.vim/plugged')
+
+
+" ======== WIKI ========= "
+
+Plug 'vimwiki/vimwiki'
+
 " ======== BASE ========= "
 
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
