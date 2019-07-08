@@ -9,18 +9,20 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sbdchd/neoformat'
-Plug 'terryma/vim-multiple-cursors'
+"Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
-
+Plug 'editorconfig/editorconfig-vim'
 " ============== UI.THEME ============ "
 
 Plug 'altercation/vim-colors-solarized'
-
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'Yggdroot/indentLine' 
 Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'ayu-theme/ayu-vim'
 
 " ======== CODE CHECKER, LINTER, AUTOCOMPLETE ======= "
 "code checker
@@ -51,6 +53,10 @@ Plug 'rking/ag.vim'
 
 " ======== LANGUAGE SUPPORTS ========= "
 
+"========LATEX========"
+Plug 'lervag/vimtex'
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+
 "======HTML CSS========"
 Plug 'mattn/emmet-vim'
 
@@ -59,7 +65,11 @@ Plug 'zchee/deoplete-jedi'
 
 "==========JS=========="
 Plug 'pangloss/vim-javascript'
+
 Plug 'posva/vim-vue'
-Plug 'ternjs/tern_for_vim'
+Plug 'leafOfTree/vim-vue-plugin'
+
+Plug 'ternjs/tern_for_vim', { 'do' : 'npm install' }
+Plug 'carlitux/deoplete-ternjs'
 
 call plug#end()
