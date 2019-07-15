@@ -4,35 +4,56 @@ source ~/.config/nvim/plugins.vim
 " ===                           EDITING OPTIONS                            === "
 " ============================================================================ "
 
+let mapleader = ','
+set ruler
+set cursorline
+set nopaste
+set nrformats= "Only decimal with counter
+
+"======== SEARCH OPTIONS ========="
+" highlight serch results
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" set number line
+set number
+set relativenumber
+
+syntax on
+
 filetype plugin on
 filetype plugin indent on
 filetype indent plugin on
 set omnifunc=syntaxcomplete#Complete background=dark
 set backspace=indent,eol,start
 
-let mapleader = ','
+" read/write file when switching buffers
 set autoread
-set termguicolors
-set number
-set relativenumber
-syntax on
-set tabstop=4
+set autowrite
+
+" tab settings
 set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set expandtab
+set smarttab
+
+" autoinde file
 set autoindent
 set cindent
-set expandtab
-set hlsearch
-set incsearch
-set splitbelow
-set splitright
+set si "Smart indent
+
+" undo files < save undo history of files after exit from vim >
+set undofile " Maintain undo history between sessions
+set undodir=~/.config/undodir_vim
+
 set ma
-set cursorline
-set nocompatible
-"new rules for python
-set ruler
-set ignorecase
-"set lazyredraw
-"set delay 
+
+"accelarated scrolling
+"set scrolljump=-55
+"set delay
 set timeoutlen=550
 "don't fold open files
 set foldlevel=99
@@ -40,24 +61,6 @@ set foldlevel=99
 set redrawtime=10000
 set re=1
 syntax sync fromstart
-
-let g:vue_disable_pre_processors=1
-autocmd FileType vue syntax sync fromstart
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css.less.pug
-let g:vim_vue_plugin_load_full_syntax = 1
-
-nnoremap <leader>v :syntax sync fromstart<CR>
-
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-noremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" diabled  F1 help tab
-"inoremap <F1> <Esc>
-
-inoremap <F1> <Esc>
-noremap <F1> <Esc>
 
 " yank to clipboad
 if has("clipboard")
@@ -69,6 +72,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -81,14 +85,10 @@ set noswapfile
 set hidden
 set lbr
 set tw=500
-set ai "Auto indent
-set si "Smart indent
 set nowrap "Wrap lines
 set textwidth=0
 set wrapmargin=0
 set colorcolumn=150
-set nrformats= "Only decimal with counter
-
 
 " ============================================================================ "
 " ===                           PLUGIN SETUP                               === "
@@ -96,163 +96,79 @@ set nrformats= "Only decimal with counter
 
 " ====== VIMWIKI ====== "
 
-let g:vimwiki_list = [{'path': '~/.config/nvim/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}] 
+source ~/.config/nvim/plugins/vimwiki.vim
 
 " ====== DEOPLETE ====== "
-call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_refresh_always = 1
 
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#max_abbr_width = 0
-let g:deoplete#max_menu_width = 0
-let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
+source ~/.config/nvim/plugins/deoplete.vim
 
-set completeopt-=preview
+" =========== SNIPPETS ========= "
 
-"deoplete dev js config 
-let g:tern#command = ["tern"]
-let g:tern#arguments = [" — persistent"]
-
-"Add extra filetypes
-let g:deoplete#sources#ternjs#filetypes = [
-                \ 'jsx',
-                \ 'javascript.jsx',
-                \ 'vue',
-                \ '...'
-                \ ]
-
-
-inoremap <silent><expr> <TAB>
-		\ pumvisible() ? "\<C-n>" :
-		\ <SID>check_back_space() ? "\<TAB>" :
-		\ deoplete#mappings#manual_complete()
-		function! s:check_back_space() abort "{{{
-		let col = col('.') - 1
-		return !col || getline('.')[col - 1]  =~ '\s'
-		endfunction"}}}
-
+source ~/.config/nvim/plugins/ultisnips.vim
 
 " === NERDTree === "
 
-let g:NERDTreeDirArrows=0
-let NERDTreeDirArrows=0
-let g:NERDTreeDirArrowExpandable = '>'
-let g:NERDTreeDirArrowCollapsible = 'v'
-let g:NERDTreeShowHidden = 1
+source ~/.config/nvim/plugins/nerdtree.vim
 
-" Hide certain files and directories from NERDTree
-let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir]]', '\.sass-cache$']
-
-"  <leader>n - Toggle NERDTree on/off
-" === Nerdtree shorcuts === "
-"nmap <leader>n :NERDTreeToggle<CR>
-noremap <C-n> : NERDTreeToggle<CR>
-
-" NERDTress File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg)
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
- exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:bg .' guifg='. a:fg
-endfunction
-
-call NERDTreeHighlightFile('py', 'cyan', 'none')
-
-call NERDTreeHighlightFile('jade', 'green', 'none')
-call NERDTreeHighlightFile('html', 'black', 'yellow')
-call NERDTreeHighlightFile('styl', 'yellow', 'none')
-call NERDTreeHighlightFile('css', 'yellow', 'none')
-call NERDTreeHighlightFile('sass', 'magenta', 'none')
-
-call NERDTreeHighlightFile('coffee', 'yellow', 'none')
-call NERDTreeHighlightFile('js', 'yellow', 'none')
-call NERDTreeHighlightFile('vue', 'white', 'green')
-call NERDTreeHighlightFile('json', 'cyan', 'none')
-
-
-call NERDTreeHighlightFile('php', 'magenta', 'none')
-
-call NERDTreeHighlightFile('sh', 'red', 'none')
-call NERDTreeHighlightFile('md', 'blue', 'none')
-call NERDTreeHighlightFile('ds_store', 'Gray', 'none')
-call NERDTreeHighlightFile('gitconfig', 'Gray', 'none')
-call NERDTreeHighlightFile('gitignore', 'Gray', 'none')
-call NERDTreeHighlightFile('bashrc', 'Gray', 'none')
-call NERDTreeHighlightFile('bashprofile', 'Gray', 'none')
-call NERDTreeHighlightFile('txt', 'Gray', 'none')
 " === EMMET === "
-let g:user_emmet_expandabbr_key='<leader-t>'
-imap <expr> <leader>t emmet#expandAbbrIntelligent("\<tab>")
 
-" =========== SNIPPETS ========= "
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-let g:UltiSnipsSnippetsDir=$HOME."/.config/nvim/snippets"
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/snippets']
-let g:UltiSnipsEnableSnipMate = 0
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+source ~/.config/nvim/plugins/emmet.vim
 
 " ===== CODE AUTO-FORMAT PLUGIN ====
-" Enable alignment
-let g:neoformat_basic_format_align = 1
 
-" Enable tab to spaces conversion
-let g:neoformat_basic_format_retab = 1
+source ~/.config/nvim/plugins/neoformat.vim
 
-" Enable trimmming of trailing whitespace
-let g:neoformat_basic_format_trim = 1
+" ===== AUTO-PAIRS PLUGIN ====
+
+source ~/.config/nvim/plugins/autopairs.vim
 
 " ==== A.L.E. ====== "
-let g:ale_enabled = 1
-let g:ale_fix_on_save = 1
-let g:ale_lint_delay = 400
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚠'
 
-let g:ale_linters = {
-\   'javascript': ['jslint'],
-\}
-nmap <leader>e :ALEDetail<CR>
+source ~/.config/nvim/plugins/ale.vim
 
 " ====== FZF CONFIG ======== "
 
-nnoremap <Leader>f :<C-u>Files<CR>
-nnoremap <Leader>b :<C-u>Buffers<CR>
-nnoremap <Leader>hi :<C-u>History<CR>
-nnoremap <Leader>d :<C-u>Dirvish<CR>
+source ~/.config/nvim/plugins/fzf.vim
 
 " ====== LATEX CONFIG ======== "
 
-let g:vimtex_enabled=1
-let g:tex_flavor = "latex"
-let g:livepreview_previewer = 'open -a Preview'
+source ~/.config/nvim/plugins/latex.vim
 
-autocmd Filetype tex setl updatetime=100
-"autocmd Filetype tex setl updatetime=100
-nmap <leader>tt :LLPStartPreview<CR>
+" ====== VUE CONFIG ======== "
 
+source ~/.config/nvim/plugins/vue.vim
 
 " =========================================================================== "
 " ===                           THEME SETUP                               === "
 " =========================================================================== "
- 
+
+" mouse scrolling in vim
+set mouse=a
+" list hidden characters
+set list
+set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·,eol:$
+
 set t_Co=256
 set foldlevel=99
 
-" theme list 
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+
+set t_ZH=^[[3m
+set t_ZR=^[[23m
+
+highlight Comment cterm=italic gui=italic
+highlight htmlArg gui=italic cterm=italic
+
+" theme list
 " # gruvbox
 " # dracula
-" # ayu  - let ayucolor="dark" 
+" # ayu  - let ayucolor="dark"
 "        - set termguicolors
 
 "set termguicolors
-"let ayucolor="mirage" 
-
+"let ayucolor="mirage"
 try
   colorscheme dracula
 catch
@@ -264,6 +180,7 @@ set fillchars+=vert:.
 
 " Set preview window to appear at bottom
 set splitbelow
+set splitright
 
 " Don't dispay mode in command line (airilne already shows it)
 set noshowmode
@@ -275,31 +192,39 @@ set noshowcmd
 """"""""""""""""""""""""""""""
 " Always show the status line
 set laststatus=2
-
 " Format the status line
 "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 " === Vim airline ==== "
-" theme - murmur, luna, violet  
-let g:airline_theme='murmur' 
-"Disable vim-airline in preview mode (luna)
-"let g:airline_exclude_preview = 1: 
-" Enable powerline fonts
-let g:airline_powerline_fonts = 1
-" unicode symbols
-let g:airline_left_sep = '▶'
-let g:airline_left_alt_sep = '❯'
-let g:airline_right_sep = '◀'
-let g:airline_right_alt_sep = '❮'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+source ~/.config/nvim/plugins/airline.vim
+
+" IndentLine
+
+source ~/.config/nvim/plugins/indentline.vim
 
 
-" remove the filetype part
-"let g:airline_section_z=''
-" remove separators for empty sections
-let g:airline_skip_empty_sections = 1
-let g:airline#extensions#whitespace#enabled = 0
+" ============================================================================ "
+" ===                             KEY MAPPINGS                             === "
+" ============================================================================ "
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+noremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" back to command mode
+inoremap jj  <Esc>
+
+inoremap <F1> <Esc>
+noremap <F1> <Esc>
+
+"test from video
+
+"nnoremap j gj
+"nnoremap k gk
+
+" toggle number function
 
 function! NumberToggle()
   if(&relativenumber == 1)
@@ -312,22 +237,10 @@ endfunc
 
 noremap <leader>n :call NumberToggle()<cr>
 
-" IndentLine 
+" remove extra whitespace from file
 
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-let g:indentLine_showFirstIndentLevel = 1
-let g:indentLine_setColors = 0
-let g:indentLine_enabled = 0
-noremap <leader>i :IndentLinesToggle<CR>
+noremap <leader>w :StripWhitespace<cr>
 
-"let g:indentLine_concealcursor = 'inc'
-"let g:indentLine_conceallevel = 2
-"let g:indentLine_setConceal = 0
-
-" ============================================================================ "
-" ===                             KEY MAPPINGS                             === "
-" ============================================================================ "
- 
 " Delete current visual selection and dump in black hole buffer before pasting
 " Used when you want to paste over something without it getting copied to
 " Vim's default buffer
@@ -338,3 +251,5 @@ vnoremap <leader>p "_dP
 "   <leader>/ - Claer highlighted search terms while preserving history
 map <leader>h :%s///<left><left>
 nmap <silent> <leader>/ :nohlsearch<CR>
+
+cmap Wq wq
